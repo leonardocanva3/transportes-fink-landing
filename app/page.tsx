@@ -3,104 +3,253 @@ import { Footer } from "./components/footer";
 import { Header } from "./components/header";
 import { Icon } from "./components/site-icon";
 
-const whatsappUrl = "https://wa.me/5551995151674?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Transportes%20Fink%20e%20gostaria%20de%20solicitar%20uma%20cota%C3%A7%C3%A3o.";
+const whatsappUrl =
+  "https://wa.me/5551995151674?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Transportes%20Fink%20e%20gostaria%20de%20solicitar%20uma%20cota%C3%A7%C3%A3o.";
+
+const heroDifferentials = [
+  { icon: "clock", title: "Pontualidade", text: "Entregas no prazo que o seu negócio precisa." },
+  { icon: "shield", title: "Segurança", text: "Sua carga protegida do início ao fim." },
+  { icon: "settings", title: "Agilidade", text: "Processos inteligentes para mais eficiência." },
+  { icon: "users", title: "Atendimento", text: "Relacionamento próximo e transparente." },
+] as const;
+
+const audiences = [
+  "Indústrias",
+  "Distribuidores",
+  "Empresas",
+  "Centros de distribuição",
+  "Gerentes de logística",
+  "Operações B2B",
+];
+
+const technologyCards = [
+  { icon: "map", title: "Informações em tempo real", text: "Mais transparência e confiança." },
+  { icon: "settings", title: "Processos otimizados", text: "Mais eficiência em cada etapa da operação." },
+  { icon: "route", title: "Gestão inteligente", text: "Decisões mais rápidas, claras e precisas." },
+  {
+    icon: "users",
+    title: "Foco no cliente",
+    text: "Atendimento próximo e soluções que conectam o seu negócio ao destino.",
+  },
+] as const;
+
+const processSteps = [
+  "Solicitação",
+  "Análise da operação",
+  "Coleta",
+  "Transporte acompanhado",
+  "Entrega",
+  "Confirmação",
+];
+
 const jsonLd = {
-  "@context": "https://schema.org", "@type": "LocalBusiness", name: "Transportes Fink",
-  description: "Transporte rodoviário de cargas com segurança, agilidade e confiabilidade.",
-  url: "https://transportesfink.com.br", telephone: "+55 51 99515-1674",
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "MovingCompany"],
+  name: "Transportes Fink",
+  description:
+    "Transporte rodoviário para empresas com segurança, agilidade, compromisso e atuação no Sul e Sudeste do Brasil.",
+  url: "https://transportesfink.com.br",
+  telephone: "+55 51 99515-1674",
   email: "transportadorafink@gmail.com",
   sameAs: ["https://www.instagram.com/transportesfink/"],
   areaServed: ["Rio Grande do Sul", "Santa Catarina", "Paraná", "São Paulo"],
-  serviceType: "Transporte rodoviário de cargas",
+  serviceType: "Transporte rodoviário de cargas para empresas",
   address: { "@type": "PostalAddress", addressRegion: "RS", addressCountry: "BR" },
 };
 
 export default function Home() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+      />
       <Header whatsappUrl={whatsappUrl} />
       <main>
-        <section id="inicio" className="cinema-hero">
-          <Image src="/images/hero-truck.png" alt="Caminhão da Transportes Fink em rodovia" fill priority sizes="100vw" className="media-cover hero-media" />
-          <div className="hero-shade" />
-          <div className="hero-center"><h1>Movemos o que<br />move o Brasil.</h1></div>
-          <div className="hero-bottom">
-            <p>Transporte rodoviário para empresas que não podem parar.</p>
-            <a href={whatsappUrl} target="_blank" rel="noreferrer" className="primary-link">Contatar <Icon name="arrow" /></a>
+        <section id="inicio" className="hero">
+          <Image
+            src="/images/hero-truck.png"
+            alt="Caminhão em rodovia ao pôr do sol representando transporte rodoviário empresarial da Transportes Fink"
+            fill
+            priority
+            sizes="100vw"
+            className="hero-image"
+          />
+          <div className="hero-overlay" />
+          <div className="hero-aurora" />
+          <div className="shell hero-grid">
+            <div className="hero-content reveal">
+              <span className="eyebrow">Logística rodoviária B2B</span>
+              <h1>Movemos o que move o <em>Brasil.</em></h1>
+              <p>
+                Transporte rodoviário para empresas que não podem parar. Do Rio Grande do Sul a
+                São Paulo, com segurança, agilidade e compromisso.
+              </p>
+              <div className="hero-actions">
+                <a href={whatsappUrl} target="_blank" rel="noreferrer" className="btn btn-primary">
+                  Solicitar cotação <Icon name="arrow" />
+                </a>
+                <a href="#quem-somos" className="btn btn-secondary">Conheça a Fink</a>
+              </div>
+            </div>
+            <div className="hero-panel reveal reveal-delay" aria-label="Resumo operacional">
+              <div><span>Atuação estratégica</span><strong>RS - SC - PR - SP</strong></div>
+              <div><span>Operação</span><strong>Empresas e cargas B2B</strong></div>
+            </div>
           </div>
-          <a href="#visao" className="hero-scroll" aria-label="Continuar"><span>Descubra</span><i /></a>
+          <div className="shell hero-differentials">
+            {heroDifferentials.map((item) => (
+              <article className="mini-card" key={item.title}>
+                <Icon name={item.icon} />
+                <div><h2>{item.title}</h2><p>{item.text}</p></div>
+              </article>
+            ))}
+          </div>
         </section>
 
-        <section id="visao" className="manifesto">
-          <div className="shell manifesto-grid">
-            <p className="section-tag">01 · Nossa visão</p>
-            <div>
-              <h2>Distâncias não<br />devem limitar<br /><em>resultados.</em></h2>
-              <p className="manifesto-copy">Conectamos operações, pessoas e negócios com uma logística precisa, segura e profundamente humana.</p>
-              <a href="#atuacao" className="text-link">Conheça nossa atuação <Icon name="arrow" /></a>
+        <section id="visao" className="section intro-section">
+          <div className="shell split-grid">
+            <div className="section-kicker reveal">Visão operacional</div>
+            <div className="reveal reveal-delay">
+              <h2>Logística com inteligência, compromisso e presença.</h2>
+              <p className="lead">
+                A Transportes Fink atende empresas que precisam de uma operação logística
+                confiável, ágil e bem acompanhada. Mais do que transportar cargas, entregamos
+                previsibilidade, segurança e tranquilidade para cada etapa da sua operação.
+              </p>
             </div>
           </div>
         </section>
 
-        <section id="quem-somos" className="story-image">
-          <Image src="/images/fleet-yard.png" alt="Frota da Transportes Fink no centro logístico" fill sizes="100vw" className="media-cover" />
-          <div className="story-shade" />
-          <div className="story-copy"><p className="section-tag section-tag-light">02 · Transportes Fink</p><h2>Uma operação<br />construída sobre<br />confiança.</h2><p>Atendimento próximo. Decisões rápidas. Compromisso em cada quilômetro.</p></div>
-          <div className="story-index">F / 02</div>
+        <section id="quem-somos" className="section audience-section">
+          <div className="shell section-head reveal">
+            <span className="eyebrow">A Fink</span>
+            <h2>Feita para empresas que exigem mais da logística.</h2>
+          </div>
+          <div className="shell audience-grid">
+            {audiences.map((audience) => (
+              <article className="glass-card audience-card reveal" key={audience}>
+                <Icon name="check" />
+                <h3>{audience}</h3>
+              </article>
+            ))}
+          </div>
         </section>
 
-        <section id="servicos" className="principles">
-          <div className="shell">
-            <div className="principles-head"><p className="section-tag">03 · Nosso compromisso</p><p>Uma logística nacional começa<br />com padrões inegociáveis.</p></div>
-            <div className="principle-list">
-              <div><span>01</span><h3>Segurança</h3><p>Cobertura completa de seguros e cuidado do início ao fim.</p></div>
-              <div><span>02</span><h3>Pontualidade</h3><p>Rotas planejadas para entregar previsibilidade à sua operação.</p></div>
-              <div><span>03</span><h3>Proximidade</h3><p>Uma equipe presente, acessível e pronta para responder.</p></div>
-              <div><span>04</span><h3>Performance</h3><p>Frota preparada e soluções desenhadas para cada demanda.</p></div>
+        <section id="compromisso" className="section assurance-section">
+          <div className="shell assurance-layout">
+            <div className="assurance-media reveal">
+              <Image
+                src="/images/fleet-yard.png"
+                alt="Frota da Transportes Fink pronta para operações empresariais"
+                fill
+                sizes="(max-width: 900px) 100vw, 44vw"
+                className="media-cover"
+              />
+            </div>
+            <div className="assurance-copy reveal reveal-delay">
+              <span className="eyebrow">Compromisso</span>
+              <h2>Segurança, pontualidade e acompanhamento de ponta a ponta.</h2>
+              <p>
+                Atendimento próximo, decisões rápidas e rotas planejadas para dar previsibilidade
+                à sua operação. A carga viaja com cobertura, cuidado e responsabilidade do primeiro
+                contato até a confirmação.
+              </p>
+              <div className="insurance-list">
+                <div><strong>RCTR-C</strong><span>Responsabilidade Civil do Transportador Rodoviário de Cargas</span></div>
+                <div><strong>RCF-DC</strong><span>Responsabilidade Civil Facultativa por Desaparecimento de Carga</span></div>
+              </div>
             </div>
           </div>
         </section>
 
-        <section id="atuacao" className="route">
-          <div className="route-media"><Image src="/images/truck-route.png" alt="Caminhão em rota pelo Sul e Sudeste do Brasil" fill sizes="(max-width: 800px) 100vw, 50vw" className="media-cover" /></div>
-          <div className="route-copy">
-            <p className="section-tag section-tag-light">04 · Área de atuação</p><h2>Do Sul a<br />São Paulo.</h2>
-            <p className="route-intro">Uma conexão estratégica entre quatro dos maiores centros econômicos do país.</p>
-            <div className="route-states"><span><b>RS</b> Rio Grande do Sul</span><span><b>SC</b> Santa Catarina</span><span><b>PR</b> Paraná</span><span><b>SP</b> São Paulo</span></div>
+        <section id="tecnologia" className="section technology-section">
+          <div className="shell section-head reveal">
+            <span className="eyebrow">Tecnologia e gestão</span>
+            <h2>Mais controle, mais transparência, mais eficiência.</h2>
+            <p>
+              Com novo site e novo sistema de gestão, a Transportes Fink evolui para oferecer uma
+              experiência ainda mais clara, moderna e eficiente aos seus clientes e parceiros.
+            </p>
+          </div>
+          <div className="shell technology-grid">
+            {technologyCards.map((item) => (
+              <article className="glass-card tech-card reveal" key={item.title}>
+                <span className="icon-box"><Icon name={item.icon} /></span>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
           </div>
         </section>
 
-        <section id="frota" className="fleet-cinema">
-          <Image src="/images/fleet-yard.png" alt="Frota moderna para transporte rodoviário" fill sizes="100vw" className="media-cover fleet-media" />
-          <div className="fleet-shade" />
-          <div className="fleet-title"><p className="section-tag section-tag-light">05 · Estrutura</p><h2>Pronta para<br /><em>ir além.</em></h2></div>
-          <p className="fleet-note">Veículos modernos.<br />Operação eficiente.<br />Movimento contínuo.</p>
-        </section>
-
-        <section className="assurance">
-          <div className="shell assurance-grid">
-            <p className="section-tag">06 · Proteção</p><h2>Sua carga<br /><em>segura.</em></h2>
-            <div className="assurance-copy"><p>Toda operação Transportes Fink conta com cobertura completa.</p><div><span>RCTR-C</span><small>Responsabilidade Civil do Transportador Rodoviário de Cargas</small></div><div><span>RCF-DC</span><small>Responsabilidade Civil Facultativa por Desaparecimento de Carga</small></div></div>
+        <section id="atuacao" className="route-section">
+          <div className="route-image reveal">
+            <Image
+              src="/images/truck-route.png"
+              alt="Caminhão em rota conectando empresas do Sul ao Sudeste"
+              fill
+              sizes="(max-width: 900px) 100vw, 50vw"
+              className="media-cover"
+            />
           </div>
-        </section>
-
-        <section id="contato" className="contact">
-          <div className="contact-watermark">
-            <Image src="/images/logo-transportes-fink.png" alt="Transportes Fink" width={1400} height={585} />
-          </div>
-          <div className="shell contact-inner">
-            <p className="section-tag section-tag-light">07 · Vamos conversar</p><h2>Sua próxima<br />entrega começa<br /><em>aqui.</em></h2>
-            <a href={whatsappUrl} target="_blank" rel="noreferrer" className="contact-action"><span><Icon name="whatsapp" /></span><div><small>Resposta rápida pelo WhatsApp</small><strong>Contatar</strong></div><Icon name="arrow" /></a>
-            <div className="contact-secondary">
-              <a href="https://www.instagram.com/transportesfink/" target="_blank" rel="noopener noreferrer" className="instagram-cta"><Icon name="instagram" /> Instagram</a>
-              <a href="mailto:transportadorafink@gmail.com">transportadorafink@gmail.com</a>
+          <div className="route-content reveal reveal-delay">
+            <span className="eyebrow">Atuação</span>
+            <h2>Do Sul ao Sudeste, conectando empresas ao destino certo.</h2>
+            <p>Operações rodoviárias com foco em Rio Grande do Sul, Santa Catarina, Paraná e São Paulo.</p>
+            <div className="states-grid" aria-label="Estados atendidos">
+              {["RS", "SC", "PR", "SP"].map((state) => <span key={state}>{state}</span>)}
             </div>
+          </div>
+        </section>
+
+        <section id="frota" className="section process-section">
+          <div className="shell process-layout">
+            <div className="section-head reveal">
+              <span className="eyebrow">Frota e processo</span>
+              <h2>Uma operação clara do primeiro contato até a entrega.</h2>
+            </div>
+            <div className="process-list">
+              {processSteps.map((step, index) => (
+                <article className="process-step reveal" key={step}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <h3>{step}</h3>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="contato" className="final-cta">
+          <Image
+            src="/images/hero-truck.png"
+            alt="Rodovia ao pôr do sol com caminhão em operação logística"
+            fill
+            sizes="100vw"
+            className="final-cta-image"
+          />
+          <div className="final-cta-overlay" />
+          <div className="shell final-cta-content reveal">
+            <span className="eyebrow">Contatar</span>
+            <h2>Sua empresa precisa de uma transportadora parceira?</h2>
+            <p>Fale com a Transportes Fink e solicite uma cotação para sua operação logística.</p>
+            <a href={whatsappUrl} target="_blank" rel="noreferrer" className="btn btn-primary">
+              Solicitar cotação via WhatsApp <Icon name="whatsapp" />
+            </a>
           </div>
         </section>
       </main>
       <Footer whatsappUrl={whatsappUrl} />
-      <a href={whatsappUrl} target="_blank" rel="noreferrer" className="whatsapp-float" aria-label="Falar com a Transportes Fink no WhatsApp"><Icon name="whatsapp" /><span>Contatar</span></a>
+      <a
+        href={whatsappUrl}
+        target="_blank"
+        rel="noreferrer"
+        className="whatsapp-float"
+        aria-label="Solicitar cotação com a Transportes Fink pelo WhatsApp"
+      >
+        <Icon name="whatsapp" />
+        <span>Cotação</span>
+      </a>
     </>
   );
 }
