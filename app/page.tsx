@@ -2,9 +2,7 @@ import Image from "next/image";
 import { Footer } from "./components/footer";
 import { Header } from "./components/header";
 import { Icon } from "./components/site-icon";
-
-const whatsappUrl =
-  "https://wa.me/5551995151674?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Transportes%20Fink%20e%20gostaria%20de%20solicitar%20uma%20cota%C3%A7%C3%A3o.";
+import { faqItems, faqSchema, seoPages, whatsappUrl } from "./seo-pages";
 
 const heroDifferentials = [
   { icon: "clock", title: "Pontualidade", text: "Entregas no prazo que o seu negócio precisa." },
@@ -57,12 +55,39 @@ const jsonLd = {
   address: { "@type": "PostalAddress", addressRegion: "RS", addressCountry: "BR" },
 };
 
+const businessInfo = [
+  {
+    title: "Transporte rodoviário para empresas",
+    text:
+      "A Transportes Fink atende empresas que precisam de transporte de cargas com planejamento, comunicação e compromisso. A operação é indicada para indústrias, distribuidores, centros de distribuição e equipes de logística que buscam um parceiro logístico B2B para rotas no Sul e Sudeste.",
+  },
+  {
+    title: "Rotas e atuação",
+    text:
+      "O foco de atuação está em Rio Grande do Sul, Santa Catarina, Paraná e São Paulo. Esse corredor conecta polos industriais, fornecedores, centros de distribuição e clientes empresariais que dependem de transporte interestadual com entrega segura e pontualidade.",
+  },
+  {
+    title: "Carga fracionada e carga fechada",
+    text:
+      "Cada operação pode exigir uma solução diferente. A carga fracionada pode atender volumes menores e embarques recorrentes, enquanto a carga fechada pode ser indicada para demandas com maior volume, prazo específico ou necessidade de controle dedicado.",
+  },
+  {
+    title: "Como preparar uma cotação",
+    text:
+      "Para solicitar um frete empresarial, informe origem, destino, tipo de carga, peso, volume, prazo desejado, frequência de embarque e condições de coleta ou entrega. Esses dados ajudam a construir uma proposta mais precisa e alinhada à operação logística.",
+  },
+] as const;
+
 export default function Home() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema()).replace(/</g, "\\u003c") }}
       />
       <Header whatsappUrl={whatsappUrl} />
       <main>
@@ -236,6 +261,50 @@ export default function Home() {
             <a href={whatsappUrl} target="_blank" rel="noreferrer" className="btn btn-primary">
               Solicitar cotação via WhatsApp <Icon name="whatsapp" />
             </a>
+          </div>
+        </section>
+
+        <section className="seo-info-section" aria-labelledby="informacoes-empresas">
+          <div className="shell seo-info-layout">
+            <div className="seo-info-head">
+              <span className="eyebrow">Informações para empresas</span>
+              <h2 id="informacoes-empresas">Conteúdo útil para planejar transporte e frete empresarial.</h2>
+              <p>
+                Uma área discreta, visível e objetiva para apoiar gestores de logística,
+                compradores, indústrias e distribuidores na avaliação de uma operação de transporte.
+              </p>
+            </div>
+            <div className="accordion-list">
+              {businessInfo.map((item, index) => (
+                <details className="info-accordion" key={item.title} open={index === 0}>
+                  <summary>{item.title}</summary>
+                  <p>{item.text}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+
+          <div className="shell faq-layout">
+            <div className="seo-info-head compact">
+              <span className="eyebrow">FAQ</span>
+              <h2>Perguntas frequentes</h2>
+            </div>
+            <div className="accordion-list">
+              {faqItems.map((item) => (
+                <details className="info-accordion" key={item.question}>
+                  <summary>{item.question}</summary>
+                  <p>{item.answer}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+
+          <div className="shell discreet-links" aria-label="Páginas informativas sobre transporte empresarial">
+            {seoPages.map((page) => (
+              <a href={`/${page.slug}`} key={page.slug}>
+                {page.title}
+              </a>
+            ))}
           </div>
         </section>
       </main>
